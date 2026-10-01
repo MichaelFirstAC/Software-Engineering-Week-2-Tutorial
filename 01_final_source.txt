@@ -1,0 +1,173 @@
+# CHECKPOINT 1
+
+const int WARNING_THRESHOLD = 40;
+const int CRITICAL_THRESHOLD = 75;
+const int STEP = 10;
+const char IDENTITY_TOKEN[] = "MAC711";
+
+void reportLoad(int load) {
+  Serial.print("LOAD:");
+  Serial.print(load);
+  if (load >= CRITICAL_THRESHOLD) {
+    Serial.println(":CRITICAL:STOP");
+  } else if (load >= WARNING_THRESHOLD) {
+    Serial.println(":WARNING:CHECK");
+  } else {
+    Serial.println(":NORMAL:CONTINUE");
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  Serial.print("STUDENT:");
+  Serial.println(IDENTITY_TOKEN);
+
+  for (int load = 0; load <= 100; load += STEP) {
+    reportLoad(load);
+  }
+}
+
+void loop() {
+  // Empty because this test runs once.
+}
+
+
+# CHECKPOINT 2
+
+const int WARNING_THRESHOLD = 40;
+const int CRITICAL_THRESHOLD = 75;
+const int STEP = 10;
+
+const char IDENTITY_TOKEN[] = "MAC711";
+
+void reportLoad(int load) {
+  Serial.print("LOAD:");
+  Serial.print(load);
+  if (load >= CRITICAL_THRESHOLD) {
+    Serial.println(":CRITICAL:STOP");
+  } else if (load >= WARNING_THRESHOLD) {
+    Serial.println(":WARNING:CHECK");
+  } else {
+    Serial.println(":NORMAL:CONTINUE");
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  Serial.print("STUDENT:");
+  Serial.println(IDENTITY_TOKEN);
+
+  // for (int load = 0; load <= 100; load += STEP) {
+  //   reportLoad(load);
+  // }
+
+  reportLoad(WARNING_THRESHOLD - 1);
+  reportLoad(WARNING_THRESHOLD);
+  reportLoad(WARNING_THRESHOLD + 1);
+  reportLoad(CRITICAL_THRESHOLD - 1);
+  reportLoad(CRITICAL_THRESHOLD);
+  reportLoad(CRITICAL_THRESHOLD + 1);
+}
+
+void loop() {
+  // Empty because this test runs once.
+}
+
+
+# CHECKPOINT 3
+
+const int WARNING_THRESHOLD = 40;
+const int CRITICAL_THRESHOLD = 75;
+const int STEP = 10;
+
+const char IDENTITY_TOKEN[] = "MAC711";
+
+// BUGGY VERSION
+
+//void reportLoad(int load) {
+//  Serial.print("LOAD:");
+//  Serial.print(load);
+//  if (load >= WARNING_THRESHOLD) {
+//    Serial.println(":WARNING:CHECK");
+//  } else if (load >= CRITICAL_THRESHOLD) {
+//    Serial.println(":CRITICAL:STOP");
+//  } else {
+//    Serial.println(":NORMAL:CONTINUE");
+//  }
+//}
+
+// FIXED VERSION
+
+void reportLoad(int load) {
+  Serial.print("LOAD:");
+  Serial.print(load);
+  if (load >= CRITICAL_THRESHOLD) {
+    Serial.println(":CRITICAL:STOP");
+  } else if (load >= WARNING_THRESHOLD) {
+    Serial.println(":WARNING:CHECK");
+  } else {
+    Serial.println(":NORMAL:CONTINUE");
+  }
+}
+
+void setup() {
+  Serial.begin(9600);
+  Serial.print("STUDENT:");
+  Serial.println(IDENTITY_TOKEN);
+
+  reportLoad(WARNING_THRESHOLD - 1);
+  reportLoad(WARNING_THRESHOLD);
+  reportLoad(WARNING_THRESHOLD + 1);
+  reportLoad(CRITICAL_THRESHOLD - 1);
+  reportLoad(CRITICAL_THRESHOLD);
+  reportLoad(CRITICAL_THRESHOLD + 1);
+}
+
+void loop() {
+  // Empty because this test runs once.
+}
+
+
+# EXTENSION CHALLENGE
+
+const int WARNING_THRESHOLD = 40;
+const int CRITICAL_THRESHOLD = 75;
+const int STEP = 10;
+
+const char IDENTITY_TOKEN[] = "MAC711";
+
+void reportLoad(int load) {
+  Serial.print("LOAD:");
+  Serial.print(load);
+  if (load >= CRITICAL_THRESHOLD) {
+    Serial.println(":CRITICAL:STOP");
+  } else if (load >= WARNING_THRESHOLD) {
+    Serial.println(":WARNING:CHECK");
+  } else {
+    Serial.println(":NORMAL:CONTINUE");
+  }
+}
+
+void printIdentity() {
+  Serial.print("STUDENT:");
+  Serial.println(IDENTITY_TOKEN);
+}
+
+void runBoundaryTests() {
+  reportLoad(WARNING_THRESHOLD - 1);
+  reportLoad(WARNING_THRESHOLD);
+  reportLoad(WARNING_THRESHOLD + 1);
+  reportLoad(CRITICAL_THRESHOLD - 1);
+  reportLoad(CRITICAL_THRESHOLD);
+  reportLoad(CRITICAL_THRESHOLD + 1);
+}
+
+void setup() {
+  Serial.begin(9600);
+  printIdentity();
+  runBoundaryTests();
+}
+
+void loop() {
+  // Empty because this test runs once.
+}
